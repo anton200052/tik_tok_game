@@ -1,0 +1,10 @@
+name: tiktok_game
+version: '${project.version}'
+main: me.vasylkov.tiktokgame.TiktokGame
+api-version: 1.19
+depend:
+  - WorldEdit
+  - WorldGuard
+commands:
+  startgame: {}
+  stopgame: {}
