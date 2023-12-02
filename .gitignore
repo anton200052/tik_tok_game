@@ -6,6 +6,7 @@
 
 # IntelliJ IDEA files
 .idea/
+target/
 
 # Eclipse files
 .classpath
