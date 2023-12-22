@@ -1,14 +1,12 @@
 package me.vasylkov.tiktokgame.commands;
 
-import me.vasylkov.tiktokgame.listeners.BlockPlaceListener;
-import me.vasylkov.tiktokgame.utils.TiktokConnectionUtils;
-import org.bukkit.ChatColor;
+import me.vasylkov.tiktokgame.utils.GameProcessUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class EndGameCommand implements CommandExecutor
+public class StopGameCommand implements CommandExecutor
 {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
@@ -21,10 +19,7 @@ public class EndGameCommand implements CommandExecutor
 
         Player player = (Player) sender;
 
-        BlockPlaceListener.getCountdownTask().endGame();
-        TiktokConnectionUtils.disconnect();
-
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cSuccessfully end the game. Goodbye!"));
+        GameProcessUtils.stopGame();
         return true;
     }
 }

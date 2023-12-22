@@ -9,12 +9,11 @@ public class TiktokConnectionUtils
 {
     private static LiveClient client;
 
-    public static void setupLiveClient(Player player, String hostName)
+    public static void setupNewLiveClient(Player player, String hostName)
     {
-        client = TikTokLive.newClient(hostName).
-                addListener(new TiktokListener(player))
-                .build();
+        client = TikTokLive.newClient(hostName).addListener(new TiktokListener(player)).build();
     }
+
 
     public static void connect()
     {

@@ -75,4 +75,32 @@ public class RegionUtils
             }
         }
     }
+
+    public static void fillAllEmptyBlocks(Player player, String regionName)
+    {
+        ProtectedRegion region = getRegion(player, regionName);
+        if (region == null)
+        {
+            return;
+        }
+
+        World world = player.getWorld();
+        BlockVector3 min = region.getMinimumPoint();
+        BlockVector3 max = region.getMaximumPoint();
+
+        for (int x = min.getBlockX(); x <= max.getBlockX(); x++)
+        {
+            for (int y = min.getBlockY(); y <= max.getBlockY(); y++)
+            {
+                for (int z = min.getBlockZ(); z <= max.getBlockZ(); z++)
+                {
+                    Block block = world.getBlockAt(x, y, z);
+                    if (block.getType() == Material.AIR)
+                    {
+                        block.setType(Material.DIAMOND_BLOCK);
+                    }
+                }
+            }
+        }
+    }
 }

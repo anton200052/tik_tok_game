@@ -1,20 +1,13 @@
 package me.vasylkov.tiktokgame;
 
-import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
-import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-import io.github.jwdeveloper.tiktok.TikTokLive;
-import me.vasylkov.tiktokgame.commands.EndGameCommand;
+import me.vasylkov.tiktokgame.commands.FillEmptyCommand;
+import me.vasylkov.tiktokgame.commands.StopGameCommand;
 import me.vasylkov.tiktokgame.commands.StartGameCommand;
 import me.vasylkov.tiktokgame.listeners.BlockPlaceListener;
-import me.vasylkov.tiktokgame.listeners.TiktokListener;
+import me.vasylkov.tiktokgame.listeners.EntityExplodeListener;
 import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.World;
-import org.bukkit.block.Block;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -25,6 +18,7 @@ public final class TiktokGame extends JavaPlugin
     public static WorldGuardPlugin worldGuardPlugin;
     public static WorldEditPlugin worldEditPlugin;
     public static String chatMessageTitle = "&cVasylkov_Tiktok_Game: ";
+    private static volatile boolean gameStarted = false;
     private static TiktokGame instance;
 
     public TiktokGame()
@@ -41,8 +35,10 @@ public final class TiktokGame extends JavaPlugin
         saveDefaultConfig();
 
         getServer().getPluginManager().registerEvents(new BlockPlaceListener(), this);
+        getServer().getPluginManager().registerEvents(new EntityExplodeListener(), this);
         Objects.requireNonNull(getCommand("startgame".toLowerCase())).setExecutor(new StartGameCommand());
-        Objects.requireNonNull(getCommand("stopgame".toLowerCase())).setExecutor(new EndGameCommand());
+        Objects.requireNonNull(getCommand("stopgame".toLowerCase())).setExecutor(new StopGameCommand());
+        Objects.requireNonNull(getCommand("fillempty".toLowerCase())).setExecutor(new FillEmptyCommand());
     }
 
     @Override
@@ -77,6 +73,15 @@ public final class TiktokGame extends JavaPlugin
         }
     }
 
+    public static boolean isGameStarted()
+    {
+        return gameStarted;
+    }
+
+    public static void setGameStarted(boolean gameStarted)
+    {
+        TiktokGame.gameStarted = gameStarted;
+    }
 
     public static TiktokGame getInstance()
     {

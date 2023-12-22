@@ -28,17 +28,11 @@ public class BlockPlaceListener implements Listener
             if (isRegionFull)
             {
                 countdownTask = new CountdownTask(player);
-                countdownTask.runTaskTimer(TiktokGame.getInstance(), 0L, 20L);
+                countdownTask.runTaskTimer(TiktokGame.getInstance(), 0L, 25L);
             }
         }
     }
 
-  /*  @EventHandler
-    public void onExplosion(EntityExplodeEvent event)
-    {
-        event.blockList().removeIf(block -> block.getType() == Material.GLASS);
-        event.setYield(5.0F);
-    }*/
 
     public static boolean isBlockPlacementListened()
     {

@@ -38,6 +38,6 @@ public class ExplosionUtils
 
                 remaining--;
             }
-        }.runTaskTimer(JavaPlugin.getProvidingPlugin(TiktokGame.class), 0L, 10L); // 4 тика = 0.20 секунды
+        }.runTaskTimer(JavaPlugin.getProvidingPlugin(TiktokGame.class), 0L, 6L); // 4 тика = 0.20 секунды
     }
 }
